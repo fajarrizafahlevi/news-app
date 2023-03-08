@@ -1,25 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import Detail from './Views/Detail';
+import List from './Views/List';
 
 function App() {
+  const url =
+    'https://newsapi.org/v2/everything?q=reactjs&pageSize=20&apiKey=048ad9312d7d413bbec398db0a8e9592';
+
+  const [articles, setArticles] = useState([]);
+
+  async function getNews() {
+    await axios.get(url).then((res) => setArticles(res.data.articles));
+  }
+
+  useEffect(() => {
+    getNews();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Routes>
+        <Route
+          path="/"
+          element={<List articles={articles} />}
+        ></Route>
+        <Route
+          path="articles/:title"
+          element={<Detail articles={articles} />}
+        ></Route>
+      </Routes>
+    </>
   );
 }
 
