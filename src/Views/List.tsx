@@ -1,22 +1,28 @@
 import { Layout } from 'antd';
 import NewsItem from '../Components/NewsItem';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 const { Content } = Layout;
 
-interface Article {
-  id: string;
-  title: string;
-}
+function List() {
+  const url =
+    'https://newsapi.org/v2/everything?q=reactjs&pageSize=20&apiKey=048ad9312d7d413bbec398db0a8e9592';
 
-interface ListProps {
-  articles: Article[];
-}
+  const [articles, setArticles] = useState([]);
 
-function List(props: ListProps) {
+  async function getNews() {
+    await axios.get(url).then((res) => setArticles(res.data.articles));
+  }
+
+  useEffect(() => {
+    getNews();
+  }, []);
+
   return (
     <Layout>
       <Content>
-        {props.articles.map((article: any) => (
+        {articles.map((article: any) => (
           <NewsItem
             key={article.title}
             article={article}

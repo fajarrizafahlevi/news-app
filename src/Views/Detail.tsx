@@ -11,11 +11,7 @@ interface Article {
   content: string;
 }
 
-interface DetailProps {
-  articles: Article[];
-}
-
-function Detail(props: DetailProps) {
+function Detail() {
   const url =
     'https://newsapi.org/v2/everything?q=reactjs&pageSize=20&apiKey=048ad9312d7d413bbec398db0a8e9592';
 
