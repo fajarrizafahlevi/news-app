@@ -42,7 +42,7 @@ function Detail(props: DetailProps) {
   }, [title]);
 
   if (loading) {
-    return <Spin />;
+    return <Spin style={{ minHeight: '100vh', display: 'flex', alignItems: 'center' }} />;
   }
 
   if (error) {
@@ -50,7 +50,7 @@ function Detail(props: DetailProps) {
   }
 
   return (
-    <>
+    <div>
       <Breadcrumb
         style={{ margin: '16px 0' }}
         items={[
@@ -66,14 +66,11 @@ function Detail(props: DetailProps) {
         ]}
       />
 
-      <div
-        className="site-layout-content"
-        style={{ background: colorBgContainer }}
-      >
-        <h1>{article?.title}</h1>
+      <div style={{ padding: '32px', background: colorBgContainer }}>
+        <h2>{article?.title}</h2>
         <p>{article?.content}</p>
       </div>
-    </>
+    </div>
   );
 }
 

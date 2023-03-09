@@ -4,12 +4,12 @@ import { Link, Route, Routes } from 'react-router-dom';
 import Detail from './views/Detail';
 import Home from './views/Home';
 import List from './views/List';
+import './App.css';
 
 const { Header, Content, Footer } = Layout;
-const { Item } = Menu;
 
 function App() {
-  const [topic, setTopic] = useState<string>('apple');
+  const [topic, setTopic] = useState<string>('Apple');
   const [pageSize, setPageSize] = useState<number>(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
@@ -32,32 +32,11 @@ function App() {
 
   return (
     <>
-      <Layout>
-        <Header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <Layout className="layout">
+        <Header className="flex middle w-full">
           <h1 style={{ color: 'white' }}>News</h1>
-          <Menu
-            theme="dark"
-            mode="horizontal"
-            defaultSelectedKeys={['2']}
-          >
-            <Item key="home">
-              <Link to="/">Home</Link>
-            </Item>
-            <Item key="articles">
-              <Link to="/articles">Articles</Link>
-            </Item>
-          </Menu>
         </Header>
-        <Content
-          style={{
-            padding: '0 50px',
-            minHeight: '100vh',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
+        <Content className="flex column content middle">
           <Routes>
             <Route
               path="/"
@@ -87,7 +66,7 @@ function App() {
             ></Route>
           </Routes>
         </Content>
-        <Footer style={{ textAlign: 'center' }}>Ant Design ©2023 Created by Ant UED</Footer>
+        <Footer className="text-center">Ant Design ©2023 Created by Ant UED</Footer>
       </Layout>
     </>
   );

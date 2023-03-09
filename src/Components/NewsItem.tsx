@@ -15,7 +15,7 @@ interface NewsItemProps {
 
 function NewsItem(props: NewsItemProps) {
   return (
-    <Card>
+    <Card style={{ maxWidth: '100vw' }}>
       <Meta
         title={<Link to={`/articles/${props.article.title}`}>{props.article.title}</Link>}
         description={props.article.description}

@@ -37,6 +37,7 @@ function List(props: ListProps) {
       setLoading(false);
     }
   }
+
   useEffect(() => {
     getNews();
   }, [url, currentPage, pageSize]);
@@ -48,7 +49,7 @@ function List(props: ListProps) {
   }
 
   if (loading) {
-    return <Spin />;
+    return <Spin className="flex middle" />;
   }
 
   if (error) {
@@ -83,7 +84,7 @@ function List(props: ListProps) {
         showSizeChanger
         onChange={(page, pageSize) => handlePageChange({ page, pageSize })}
         onShowSizeChange={(page, pageSize) => handlePageChange({ page, pageSize })}
-        style={{ margin: '16px' }}
+        style={{ margin: '16px auto' }}
       />
     </>
   );
