@@ -1,6 +1,8 @@
 import { Card } from 'antd';
 import { Link } from 'react-router-dom';
 
+const { Meta } = Card;
+
 interface Article {
   id: string;
   title: string;
@@ -14,10 +16,10 @@ interface NewsItemProps {
 function NewsItem(props: NewsItemProps) {
   return (
     <Card>
-      <h3>
-        <Link to={`/articles/${props.article.title}`}>{props.article.title}</Link>
-      </h3>
-      <p>{props.article.description}</p>
+      <Meta
+        title={<Link to={`/articles/${props.article.title}`}>{props.article.title}</Link>}
+        description={props.article.description}
+      />
     </Card>
   );
 }

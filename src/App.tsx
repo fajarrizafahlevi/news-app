@@ -1,7 +1,6 @@
 import { Layout, Menu } from 'antd';
 import { useState } from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
-import './App.css';
 import Detail from './views/Detail';
 import Home from './views/Home';
 import List from './views/List';
@@ -34,8 +33,8 @@ function App() {
   return (
     <>
       <Layout>
-        <Header>
-          <div className="logo" />
+        <Header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <h1 style={{ color: 'white' }}>News</h1>
           <Menu
             theme="dark"
             mode="horizontal"
@@ -49,7 +48,16 @@ function App() {
             </Item>
           </Menu>
         </Header>
-        <Content style={{ padding: '0 50px' }}>
+        <Content
+          style={{
+            padding: '0 50px',
+            minHeight: '100vh',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
           <Routes>
             <Route
               path="/"

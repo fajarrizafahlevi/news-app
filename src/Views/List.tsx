@@ -68,7 +68,7 @@ function List(props: ListProps) {
           },
         ]}
       />
-      <Content>
+      <Content style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
         {articles.map((article: any) => (
           <NewsItem
             key={article.title}
@@ -83,6 +83,7 @@ function List(props: ListProps) {
         showSizeChanger
         onChange={(page, pageSize) => handlePageChange({ page, pageSize })}
         onShowSizeChange={(page, pageSize) => handlePageChange({ page, pageSize })}
+        style={{ margin: '16px' }}
       />
     </>
   );
