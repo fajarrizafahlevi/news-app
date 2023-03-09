@@ -5,7 +5,11 @@ import axios from 'axios';
 
 interface Article {
   title: string;
-  content: string | React.ReactNode;
+  author: string;
+  publishedAt: string;
+  content: React.ReactNode;
+  url: string;
+  source: { name: string };
 }
 
 interface DetailProps {
@@ -16,7 +20,7 @@ interface DetailProps {
 function Detail(props: DetailProps) {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
-  const [article, setArticle] = useState<Article | undefined>(undefined);
+  const [article, setArticle] = useState<Article | null>(null);
 
   const { url, topic } = props;
   const { title } = useParams();
@@ -29,6 +33,11 @@ function Detail(props: DetailProps) {
       const response = await axios.get(url);
       const articles = response.data.articles;
       const foundArticle = articles.find((article: Article) => article.title === title);
+
+      if (!foundArticle) {
+        setLoading(true);
+      }
+
       setArticle(foundArticle);
       setLoading(false);
     } catch (error) {
@@ -68,7 +77,13 @@ function Detail(props: DetailProps) {
 
       <div style={{ padding: '32px', background: colorBgContainer }}>
         <h2>{article?.title}</h2>
+        <div>
+          <p>
+            Written by <strong>{article?.author}</strong>, published at {article?.publishedAt}
+          </p>
+        </div>
         <p>{article?.content}</p>
+        <a href={article?.url}>Source: {article?.source.name}</a>
       </div>
     </div>
   );

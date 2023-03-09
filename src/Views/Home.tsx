@@ -9,7 +9,7 @@ interface HomeProps {
 function Home({ changeTopic }: HomeProps) {
   const [keyword, setKeyword] = useState<string>('');
 
-  const handleKeywordChange = (event: any) => {
+  const handleKeywordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setKeyword(event.target.value);
   };
 

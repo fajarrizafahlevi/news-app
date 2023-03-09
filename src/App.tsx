@@ -1,20 +1,20 @@
-import { Layout, Menu } from 'antd';
 import { useState } from 'react';
-import { Link, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+import { Layout } from 'antd';
 import Detail from './views/Detail';
 import Home from './views/Home';
 import List from './views/List';
 import './App.css';
+import { API } from './utils/api';
 
 const { Header, Content, Footer } = Layout;
 
 function App() {
-  const [topic, setTopic] = useState<string>('Apple');
+  const [topic, setTopic] = useState<string>('Technology');
   const [pageSize, setPageSize] = useState<number>(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const BASE_URL = 'https://newsapi.org/v2/everything?';
-  const API_KEY = '048ad9312d7d413bbec398db0a8e9592';
+  const { BASE_URL, API_KEY } = API;
 
   const url = `${BASE_URL}q=${topic}&language=en&pageSize=${pageSize}&page=${currentPage}&apiKey=${API_KEY}`;
 
@@ -36,12 +36,14 @@ function App() {
         <Header className="flex middle w-full">
           <h1 style={{ color: 'white' }}>News</h1>
         </Header>
+
         <Content className="flex column content middle">
           <Routes>
             <Route
               path="/"
               element={<Home changeTopic={handleChangeTopic} />}
             ></Route>
+
             <Route
               path="/articles"
               element={
@@ -55,6 +57,7 @@ function App() {
                 />
               }
             ></Route>
+
             <Route
               path="/articles/:title"
               element={
@@ -66,7 +69,8 @@ function App() {
             ></Route>
           </Routes>
         </Content>
-        <Footer className="text-center">Ant Design ©2023 Created by Ant UED</Footer>
+
+        <Footer className="text-center">©2023</Footer>
       </Layout>
     </>
   );

@@ -6,13 +6,19 @@ import { Link } from 'react-router-dom';
 
 const { Content } = Layout;
 
+interface Article {
+  id: string;
+  title: string;
+  description: string;
+}
+
 interface ListProps {
   url: string;
   topic: string;
   currentPage: number;
   pageSize: number;
-  changeCurrentPage: any;
-  changePageSize: any;
+  changeCurrentPage: (page: number) => void;
+  changePageSize: (pageSize: number) => void;
 }
 
 interface Page {
@@ -23,7 +29,7 @@ interface Page {
 function List(props: ListProps) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [articles, setArticles] = useState([]);
+  const [articles, setArticles] = useState<Article[]>([]);
 
   const { url, topic, currentPage, pageSize, changeCurrentPage, changePageSize } = props;
 
@@ -70,7 +76,7 @@ function List(props: ListProps) {
         ]}
       />
       <Content style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-        {articles.map((article: any) => (
+        {articles.map((article: Article) => (
           <NewsItem
             key={article.title}
             article={article}
